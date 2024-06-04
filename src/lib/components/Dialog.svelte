@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { cssVariables } from '../utils/svelte-utils';
+  import { cssVariables } from '../utils/svelte-utils.js';
   import { fade } from 'svelte/transition';
 
   export let isOpen: boolean;

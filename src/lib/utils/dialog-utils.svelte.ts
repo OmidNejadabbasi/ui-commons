@@ -1,12 +1,22 @@
 import Confirmation from '../components/dialogs/Confirmation.svelte';
-import { mount } from 'svelte';
+import { mount, unmount } from 'svelte';
 
 export class DialogUtils {
-  static async confirmation(message: string): Promise<DialogResult> {
-    let props = $state({ message });
-    const dialog = mount(Confirmation, { target: document.body, props: props });
-
-    return DialogResult.OK;
+  static async confirmation(mes: string): Promise<DialogResult> {
+    return new Promise<DialogResult>((res) => {
+      let message = $state(mes);
+      console.log(typeof Confirmation);
+      const dialog = mount(Confirmation, {
+        target: document.body,
+        props: {
+          message,
+          onClose: (result) => {
+            res(result.detail);
+            unmount(dialog);
+          }
+        }
+      });
+    });
   }
 }
 

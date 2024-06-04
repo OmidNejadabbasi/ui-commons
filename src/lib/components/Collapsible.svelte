@@ -18,7 +18,7 @@
       on:click={() => {
         isOpen = !isOpen;
       }}
-      class="bg-gray-200 text-left py-1 rounded-md m-0 pl-3"
+      class="bg-gray-200 text-left py-1 rounded-md my-2 pl-3"
     >
       {@render header()}
     </dir>

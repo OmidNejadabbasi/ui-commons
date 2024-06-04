@@ -1,26 +1,32 @@
 <script lang="ts">
-  import Dialog from "../Dialog.svelte";
-  import Button from "../Button.svelte";
-  import { createEventDispatcher, type EventDispatcher } from "svelte";
-  import type { DialogResult } from "$lib/index.js";
+  import Dialog from '../Dialog.svelte';
+  import { onDestroy } from 'svelte';
+  import { DialogResult } from '../../utils/index.js';
 
-  let { message } = $props();
-  let isOpen = true;
-  let dispatcher = createEventDispatcher()
-  function confirm(){
+  let { message, onClose }: { message; onClose } = $props();
+  let isOpen = $state(true);
+  function closeWithRes(res: DialogResult) {
     isOpen = false;
-    // dispatcher()
+    onClose(res);
   }
 </script>
 
-<Dialog {isOpen} >
-    <p class="text-lg"> {message}</p>
-    <div class="flex">
-        {@render primaryButton("Okay")}
+<Dialog {isOpen}>
+  <div class="min-w-96">
+    <p class="text-lg">{message}</p>
+    <div class="flex gap-2">
+      <button
+        class="bg-emerald-400 rounded px-2 py-1"
+        on:click={() => closeWithRes(DialogResult.OK)}
+      >
+        Ok
+      </button>
+      <button
+        class="rounded bg-gray-200 px-2 py-1"
+        on:click={() => closeWithRes(DialogResult.CANCEL)}>Cancel</button
+      >
     </div>
+  </div>
 </Dialog>
-{#snippet primaryButton(text)}
-        <button class="bg-emerald-400 rounded px-2 py-1" on:click={confirm}>Ok</button>
-        <button class="rounded bg-gray-200 px-2 py-1" 
-        on:click={()=>isOpen= false}>Cancel</button>
-{/snippet}
+<style lang="postcss">
+</style>
