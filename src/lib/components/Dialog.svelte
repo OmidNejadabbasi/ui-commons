@@ -2,7 +2,7 @@
   import { cssVariables } from '../utils/svelte-utils.js';
   import { fade } from 'svelte/transition';
 
-  let { isOpen = $bindable() } = $props<{ isOpen: boolean }>();
+  let { isOpen = $bindable(), zindex = 10 } = $props<{ isOpen: boolean; zindex? }>();
 
   let left,
     width = $state(0);
@@ -20,13 +20,13 @@
   bind:this={wrapper}
   class:showing={isOpen}
   bind:clientWidth={width}
-  use:cssVariables={{ widthVar }}
+  use:cssVariables={{ widthVar, zindex: zindex + 1 }}
 >
   <slot />
 </div>
 
 {#if isOpen}
-  <div class="overlay" on:click={close} transition:fade></div>
+  <div class="overlay" on:click={close} transition:fade use:cssVariables={{ zindex: zindex }}></div>
 {:else}{/if}
 
 <style>
@@ -42,7 +42,7 @@
     height: 100vh;
     background-color: #202124;
     opacity: 0.42;
-    z-index: 10;
+    z-index: var(--zindex);
   }
   .wrapper {
     @apply rounded-md p-3 bg-white;
@@ -51,7 +51,7 @@
     top: 50vh;
     transform: translate(0, -50%);
     max-height: 80%;
-    z-index: 20;
+    z-index: var(--zindex);
     display: none;
   }
 </style>
