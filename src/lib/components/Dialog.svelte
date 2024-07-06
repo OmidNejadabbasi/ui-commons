@@ -2,12 +2,17 @@
   import { cssVariables } from '../utils/svelte-utils.js';
   import { fade } from 'svelte/transition';
 
-  export let isOpen: boolean;
+  let { isOpen = $bindable() } = $props<{ isOpen: boolean }>();
 
-  let left, width;
+  let left,
+    width = $state(0);
   let top;
   let wrapper: HTMLElement;
-  $: widthVar = `${width}px`;
+  let widthVar = $derived(`${width}px`);
+
+  function close() {
+    isOpen = false;
+  }
 </script>
 
 <div
@@ -21,7 +26,7 @@
 </div>
 
 {#if isOpen}
-  <div class="overlay" on:click={() => (isOpen = false)} transition:fade></div>
+  <div class="overlay" on:click={close} transition:fade></div>
 {:else}{/if}
 
 <style>
