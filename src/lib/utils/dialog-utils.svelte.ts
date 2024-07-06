@@ -12,7 +12,7 @@ export class DialogUtils {
         props: {
           message,
           onClose: (result) => {
-            res(result.detail);
+            res(result);
             unmount(dialog);
           }
         }
