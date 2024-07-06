@@ -22,6 +22,7 @@
     {value}
     {placeholder}
     on:input={handleInput}
+    on:keydown
     {disabled}
     class="w-full block border-[1.5px] focus:border-blue-400 border-gray-300 transition-all duration-200 rounded px-2 py-1.5 focus:shadow-md shadow-slate-700"
   />
