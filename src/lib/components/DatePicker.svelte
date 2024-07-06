@@ -1,11 +1,15 @@
 <script lang="ts">
-  let { label, value = $bindable('') } = $props<{ label; value: string }>();
+  let {
+    label,
+    value = $bindable(''),
+    disabled = false
+  } = $props<{ label; value: string; disabled?: boolean }>();
   //   let _value = $state('02/02/2023');
 </script>
 
 <div class="w-full">
   <p class="pl-1 font-label font-light pb-1">{label}</p>
-  <input type="date" class="input" bind:value />
+  <input type="date" class="input" bind:value {disabled} />
 </div>
 
 <style lang="postcss">

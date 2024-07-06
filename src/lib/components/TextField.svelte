@@ -5,6 +5,7 @@
   export let placeholder = '';
   export let label = '';
   export let description = '';
+  export const disabled: boolean = false;
 
   const handleInput = (e) => {
     // in here, you can switch on type and implement
@@ -21,6 +22,7 @@
     {value}
     {placeholder}
     on:input={handleInput}
+    {disabled}
     class="w-full block border-[1.5px] focus:border-blue-400 border-gray-300 transition-all duration-200 rounded px-2 py-1.5 focus:shadow-md shadow-slate-700"
   />
   <p>{description}</p>
