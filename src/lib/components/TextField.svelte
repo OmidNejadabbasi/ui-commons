@@ -5,7 +5,7 @@
   export let placeholder = '';
   export let label = '';
   export let description = '';
-  export const disabled: boolean = false;
+  export let disabled: boolean = false;
 
   const handleInput = (e) => {
     // in here, you can switch on type and implement
